@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using DataLayer.Entities;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Blog.DataLayer.Entities
 {
-    public class Post
+    public class Post : BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
         public int UserId { get; set; }
         public int CategoryId { get; set; }
         [Required]
@@ -18,6 +17,7 @@ namespace Blog.DataLayer.Entities
         public string Description { get; set; }
         public int Visit { get; set; }
 
+        #region Relation
         [ForeignKey("UserId")]
         public User User { get; set; }
 
@@ -25,5 +25,6 @@ namespace Blog.DataLayer.Entities
         public Category Category { get; set; }
 
         public ICollection<PostComment> PostComments { get; set; }
+        #endregion
     }
 }

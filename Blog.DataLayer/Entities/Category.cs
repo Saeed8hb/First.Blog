@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using DataLayer.Entities;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Blog.DataLayer.Entities
 {
-    public class Category
+    public class Category : BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
         [Required]
         public string Title { get; set; }
         [Required]
@@ -14,6 +13,8 @@ namespace Blog.DataLayer.Entities
         public string MetaTag { get; set; }
         public string MetaDescription { get; set; }
 
+        #region Relation
         public ICollection<Post> Posts { get; set; }
+        #endregion
     }
 }
