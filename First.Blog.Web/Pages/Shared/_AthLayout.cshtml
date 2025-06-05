@@ -11,7 +11,8 @@
     <section id="content">
         @RenderBody();
     </section>
-
+    <script src="js/jquery.min.js"></script>
+    <partial name="_ValidationScriptsPartial"/>
     @await RenderSectionAsync("Script" , false)
 </div>
 </body>
