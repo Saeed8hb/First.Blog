@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Endpoint.Pages.Authentication
 {
+    [ValidateAntiForgeryToken]
     [BindProperties]
     public class RegisterModel : PageModel
     {
@@ -47,6 +48,11 @@ namespace Endpoint.Pages.Authentication
 
         public IActionResult OnPost()
         {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
             var result = _userService.Register(new UserRegisterDto()
             {
                 FullName = FullName,

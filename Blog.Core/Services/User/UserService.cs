@@ -15,6 +15,16 @@ namespace CoreLayer.Services.User
         {
             _context = context;
         }
+
+        public OperationResult LoginUser(UserLoginDto loginDto)
+        {
+            var passwordHashed = loginDto.Password.EncodeToMd5();
+            var isUserExist = _context.Users.Any(u => u.UserName == loginDto.UserName && u.Password == passwordHashed);
+            if (!isUserExist)
+                return OperationResult.NotFound("کاربری یافت نشد");
+            return OperationResult.Success("ورود با موفقیت انجام شد");
+        }
+
         public OperationResult Register(UserRegisterDto registerDto)
         {
             var isUserExist = _context.Users.Any(u => u.UserName == registerDto.UserName || u.FullName == registerDto.FullName);
